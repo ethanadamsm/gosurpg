@@ -1,9 +1,11 @@
 require "gosu"
+require_relative "map.rb"
 
 class GameWindow < Gosu::Window
 
 	def initialize
 		super 640, 480
+		@map = Map.new
 	end
 
 	def update
@@ -11,7 +13,7 @@ class GameWindow < Gosu::Window
 	end
 
 	def draw
-		
+		@map.draw
 	end
 
 	def button_down(id)
