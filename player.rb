@@ -37,11 +37,11 @@ class Player
 	end
 
 	def teleport_up
-
+		teleport(@x, (Constants::THEIGHT * 4) + 1)
 	end
 
 	def teleport_down
-
+		teleport(@x, (Constants::WHEIGHT - (Constants::THEIGHT * 4)) - Constants::PHEIGHT - 1)
 	end
 
 	def move_left
