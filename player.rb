@@ -29,19 +29,19 @@ class Player
 	end
 
 	def teleport_right
-		teleport((Constants::WWIDTH - Constants::TWIDTH * 4) - (Constants::PWIDTH - 1), @y)
+		teleport((Constants::WWIDTH - Constants::TWIDTH * 4) - (Constants::PWIDTH + Constants::TWIDTH), @y)
 	end
 
 	def teleport_left
-		teleport((Constants::TWIDTH * 4) + 1, @y)
+		teleport((Constants::TWIDTH * 4) + Constants::TWIDTH, @y)
 	end
 
 	def teleport_up
-		teleport(@x, (Constants::THEIGHT * 4) + 1)
+		teleport(@x, (Constants::THEIGHT * 4) + Constants::THEIGHT)
 	end
 
 	def teleport_down
-		teleport(@x, (Constants::WHEIGHT - (Constants::THEIGHT * 4)) - Constants::PHEIGHT - 1)
+		teleport(@x, (Constants::WHEIGHT - (Constants::THEIGHT * 4)) - Constants::PHEIGHT - Constants::THEIGHT)
 	end
 
 	def move_left
