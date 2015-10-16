@@ -32,8 +32,32 @@ class Map
 		row_final
 	end
 
-	def create_column
+	def create_column_right
+		@rows.each do |element|
+			element.push(Tile.new(Constants::THEIGHT, Constants::TWIDTH, element[element.length - 1].get_x + Constants::TWIDTH, element[0].get_y, @textures.sample))
+		end
+	end
 
+	def create_column_left
+		@rows.map! { |element|
+			[(Tile.new(Constants::THEIGHT, Constants::TWIDTH, element[0].get_x - Constants::TWIDTH, element[0].get_y, @textures.sample))] + element
+		}
+	end
+
+	def move_column_left
+		@rows.each do |element|
+			element.each do |n|
+				n.set_x(n.get_x - Constants::TWIDTH)
+			end
+		end
+	end
+
+	def move_column_right
+		@rows.each do |element|
+			element.each do |n|
+				n.set_x(n.get_x + Constants::TWIDTH)
+			end
+		end
 	end
 
 end
