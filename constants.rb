@@ -1,0 +1,11 @@
+module Constants
+
+	TWIDTH = 10
+	THEIGHT = 10
+	WWIDTH = 640
+	WHEIGHT = 480
+	PWIDTH = 15
+	PHEIGHT = 20
+	MOVEMENT = 2
+
+end
