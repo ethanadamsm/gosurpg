@@ -27,6 +27,10 @@ class GameWindow < Gosu::Window
 				@player.teleport_right
 			when 2
 				@player.teleport_left
+			when 3
+				@player.teleport_down
+			when 4
+				@player.teleport_up
 		end
 	end
 
