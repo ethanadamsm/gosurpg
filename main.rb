@@ -25,8 +25,12 @@ class GameWindow < Gosu::Window
 		case @player.check_spot?
 			when 1  
 				@player.teleport_right
+				@map.create_column_right
+				@map.move_column_left
 			when 2
 				@player.teleport_left
+				@map.create_column_left
+				@map.move_column_right
 			when 3
 				@player.teleport_down
 			when 4
