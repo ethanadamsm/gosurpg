@@ -1,45 +1,39 @@
 require "gosu"
 require_relative "z_order"
+require_relative "constants"
+require_relative "tile"
 
 class Map
 
 	def initialize
-		@rass = Gosu::Image.new("media/grass.png")
-		@dirt = Gosu::Image.new("media/dirt.png")
+		@textures = []
+		@textures.push(Gosu::Image.new("media/grass.png"))
+		@textures.push(Gosu::Image.new("media/dirt.png"))
+
 		@rows = []
-		if File.open("media/map.txt", "r") == nil
-			(0...480 / grass.height).each do |n|
-				rows.push(create_row)
-			end
+		(0..Constants::WHEIGHT / Constants::THEIGHT).each do |n|
+			@rows.push(create_row(n * Constants::THEIGHT))
 		end
 	end
 
 	def draw
-		@grass.draw(0, 0, 0)
-		@rows.each_with_index do |row, index|
-			draw_row(row, index)
+		@rows.each do |element|
+			element.each do |n|
+				n.draw
+			end
 		end
 	end
 
-	def create_row
+	def create_row(y)
 		row_final = []
-		(0...480 / @grass.height).each do |n|
-			row_final.push(rand(1))
+		(0..Constants::WWIDTH / Constants::TWIDTH).each do |n|
+			row_final.push(Tile.new(Constants::THEIGHT, Constants::TWIDTH, n * Constants::THEIGHT, y, @textures.sample))
 		end
 		row_final
 	end
 
-	def draw_row(row, spot)
-		x = 0
-		row.each do |type|
-			case type
-			when 0
-				@grass.draw(x, spot*@grass.width, ZOrder::TILES)
-			when 1 
-				@dirt.draw(x, spot*@grass.width, ZOrder::TILES)
-			end
-			x += @grass.width
-		end
+	def create_column
+
 	end
 
 end
