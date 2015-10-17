@@ -32,6 +32,15 @@ class Map
 		row_final
 	end
 
+	def block_correct?(location)
+		case location
+			when "right"
+				return @rows[0][@rows[0].length - 1].get_x == Constants::WWIDTH - Constants::TWIDTH
+			when "left"
+				return @rows[0][0].get_x == 0
+		end
+	end
+
 	def create_column_right
 		@rows.each do |element|
 			element.push(Tile.new(Constants::THEIGHT, Constants::TWIDTH, element[element.length - 1].get_x + Constants::TWIDTH, element[0].get_y, @textures.sample))
