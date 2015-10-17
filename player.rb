@@ -11,15 +11,19 @@ class Player
 		@y = y
 	end
 
+	def update
+		if @y < 1 
+			teleport(@x, 1)
+		elsif @y + Constants::PHEIGHT > Constants::WHEIGHT - 1
+			teleport(@x, Constants::WHEIGHT - Constants::PHEIGHT - 1)
+		end
+	end
+
 	def check_spot?
 		if @x + Constants::PWIDTH > Constants::WWIDTH - Constants::TWIDTH * 4
 			return 1
 		elsif @x < Constants::TWIDTH * 4
 			return 2
-		elsif @y + Constants::PHEIGHT > Constants::WHEIGHT - Constants::THEIGHT * 4 
-			return 3
-		elsif @y < Constants::THEIGHT * 4
-			return 4
 		end		
 	end
 
@@ -34,14 +38,6 @@ class Player
 
 	def teleport_left
 		teleport((Constants::TWIDTH * 4) + Constants::TWIDTH, @y)
-	end
-
-	def teleport_up
-		teleport(@x, (Constants::THEIGHT * 4) + Constants::THEIGHT)
-	end
-
-	def teleport_down
-		teleport(@x, (Constants::WHEIGHT - (Constants::THEIGHT * 4)) - Constants::PHEIGHT - Constants::THEIGHT)
 	end
 
 	def move_left
