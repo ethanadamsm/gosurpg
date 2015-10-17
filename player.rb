@@ -2,6 +2,7 @@ require "gosu"
 require_relative "z_order"
 require_relative "constants"
 require_relative "map"
+require_relative "inventory"
 
 class Player
 
@@ -9,6 +10,7 @@ class Player
 		@animation = Gosu::Image.new("media/player.png")
 		@x = x
 		@y = y
+		@inv = Inventory.new
 	end
 
 	def update
