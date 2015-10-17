@@ -4,8 +4,14 @@ class Inventory
 		@items = []
 	end	
 
-	def add_item 
-		
+	def add_item(name_, quantity) 
+		@items.map{ |n|
+			if n.name == name_
+				@items.push(name_, quantity)
+			else
+				n.number += quantity 
+			end
+		}
 	end
 
 end
