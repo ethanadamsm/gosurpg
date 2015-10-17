@@ -21,21 +21,23 @@ class GameWindow < Gosu::Window
 		elsif button_down?(Gosu::KbRight)
 			@player.move_right
 		end
-		
+
 		case @player.check_spot?
 			when 1  
 				@player.teleport_right
-				@map.create_column_right
+				if @map.block_correct?("right")
+					@map.create_column_right
+				end
 				@map.move_column_left
 			when 2
 				@player.teleport_left
-				@map.create_column_left
+				if @map.block_correct?("left")
+					@map.create_column_left
+				end
 				@map.move_column_right
-			when 3
-				@player.teleport_down
-			when 4
-				@player.teleport_up
 		end
+
+		@player.update
 	end
 
 	def draw
