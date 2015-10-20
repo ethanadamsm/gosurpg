@@ -1,6 +1,7 @@
 require "gosu"
 require_relative "z_order"
 require_relative "constants"
+require_relative "hitbox"
 
 class Item
 
@@ -11,6 +12,7 @@ class Item
 		@y = y
 		@ground = ground
 		@animation = animation
+		@hitbox = Hitbox.new(@x, @y, Constants::IWIDTH, Constants::IHEIGHT)
 	end
 
 	def add_number(num)
@@ -31,6 +33,22 @@ class Item
 
 	def get_y
 		@y
+	end
+
+	def get_name 
+		@name
+	end
+
+	def get_number
+		@number
+	end
+
+	def set_ground(ground)
+		@ground = ground
+	end
+
+	def hitbox
+		@hitbox.hitbox
 	end
 
 	def draw
