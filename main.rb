@@ -2,13 +2,26 @@ require "gosu"
 require_relative "map"
 require_relative "constants"
 require_relative "player"
+require_relative "item"
 
 class GameWindow < Gosu::Window
 
 	def initialize
 		super Constants::WWIDTH, Constants::WHEIGHT
+		filenames = open("media/names.txt")
+		filenames = filenames.read
+		@itemnames = filenames.split(",")
+		fileani = open("media/ani.txt")
+		fileani = fileani.read
+		fileani = fileani.split(", ")
+		@itemani = []
+		fileani.each do |element|
+			@itemani.push(Gosu::Image.new("media/" + element))
+		end
 		@map = Map.new
 		@player = Player.new(Constants::WWIDTH / 2, Constants::WHEIGHT / 2)
+		@items = []
+		create_items_random
 	end
 
 	def update
@@ -29,12 +42,14 @@ class GameWindow < Gosu::Window
 					@map.create_column_right
 				end
 				@map.move_column_left
+				@items.each do |element| element.move_right end
 			when 2
 				@player.teleport_left
 				if @map.block_correct?("left")
 					@map.create_column_left
 				end
 				@map.move_column_right
+				@items.each do |element| element.move_left end
 		end
 
 		@player.update
@@ -43,10 +58,20 @@ class GameWindow < Gosu::Window
 	def draw
 		@map.draw
 		@player.draw
+		@items.each do |element|
+			element.draw
+		end
 	end
 
 	def button_down(id)
 		close if id == Gosu::KbEscape
+	end
+
+	def create_items_random
+		(0...rand(5)).each do |n|
+			spot = rand(0...@itemnames.length)
+			@items.push(Item.new(@itemnames[spot], rand(3), rand(0...(Constants::WWIDTH - Constants::IWIDTH)), rand(0...(Constants::WHEIGHT - Constants::IHEIGHT)), Constants::IWIDTH, Constants::IHEIGHT, true, @itemani[spot]))
+		end
 	end
 
 end
