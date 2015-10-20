@@ -1,7 +1,10 @@
+require "gosu"
+
 class Inventory
 
 	def initialize 
 		@items = []
+		@border = Gosu::Image.new("media/border.png")
 	end	
 
 	def add_item(name_, quantity) 
@@ -12,6 +15,10 @@ class Inventory
 				n.number += quantity 
 			end
 		}
+	end
+
+	def draw
+
 	end
 
 end
