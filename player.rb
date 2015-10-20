@@ -58,6 +58,10 @@ class Player
 		@y += Constants::MOVEMENT
 	end
 
+	def hitbox
+		return [@x, @y, Constants::PWIDTH, Constants::PHEIGHT]
+	end
+
 	def draw
 		@animation.draw(@x, @y, ZOrder::PLAYER)
 	end
