@@ -33,6 +33,13 @@ class GameWindow < Gosu::Window
 			@player.move_left
 		elsif button_down?(Gosu::KbRight)
 			@player.move_right
+		elsif button_down?(Gosu::KbP)
+			@items.each do |element| 
+				if collision(@player.hitbox, element.hitbox)
+					@items[@items.index(element)].set_ground(false)
+					@player.add_item(element.get_name, element.get_number)
+				end
+			end	
 		end
 
 		case @player.check_spot?
@@ -72,6 +79,10 @@ class GameWindow < Gosu::Window
 			spot = rand(0...@itemnames.length)
 			@items.push(Item.new(@itemnames[spot], rand(3), rand(0...(Constants::WWIDTH - Constants::IWIDTH)), rand(0...(Constants::WHEIGHT - Constants::IHEIGHT)), Constants::IWIDTH, Constants::IHEIGHT, true, @itemani[spot]))
 		end
+	end
+
+	def collision(h1, h2)
+			return h1[0] < h2[0] + h2[2] && h1[0] + h1[2] > h2[0] && h1[1] + h1[3] > h2[1] && h1[1] < h2[1] + h2[3]
 	end
 
 end
