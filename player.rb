@@ -3,6 +3,7 @@ require_relative "z_order"
 require_relative "constants"
 require_relative "map"
 require_relative "inventory"
+require_relative "hitbox"
 
 class Player
 
@@ -11,6 +12,7 @@ class Player
 		@x = x
 		@y = y
 		@inv = Inventory.new
+		@hitbox = Hitbox.new(@x, @y, Constants::PWIDTH, Constants::PHEIGHT)
 	end
 
 	def update
@@ -19,6 +21,7 @@ class Player
 		elsif @y + Constants::PHEIGHT > Constants::WHEIGHT - 1
 			teleport(@x, Constants::WHEIGHT - Constants::PHEIGHT - 1)
 		end
+		@hitbox.update_c(@x, @y)
 	end
 
 	def check_spot?
@@ -27,6 +30,10 @@ class Player
 		elsif @x < Constants::TWIDTH * 4
 			return 2
 		end		
+	end
+
+	def add_item(name, quantity)
+		@inv.add_item(name, quantity)
 	end
 
 	def teleport(x, y) 
@@ -59,7 +66,7 @@ class Player
 	end
 
 	def hitbox
-		return [@x, @y, Constants::PWIDTH, Constants::PHEIGHT]
+		@hitbox.hitbox
 	end
 
 	def draw
