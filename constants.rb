@@ -6,6 +6,8 @@ module Constants
 	WHEIGHT = 480
 	PWIDTH = 15
 	PHEIGHT = 20
+	IWIDTH = 15
+	IHEIGHT = 15
 	MOVEMENT = 2
 
 end
