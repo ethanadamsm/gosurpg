@@ -3,6 +3,7 @@ require_relative "map"
 require_relative "constants"
 require_relative "player"
 require_relative "item"
+require_relative "collision"
 
 class GameWindow < Gosu::Window
 
@@ -23,7 +24,13 @@ class GameWindow < Gosu::Window
 			@player.move_right
 		elsif button_down?(Gosu::KbP)
 			@map.get_items.each do |element| 
-				
+				collision = Collision.new(element, @player)
+				if collision.has_collided
+					puts "Collision ocurred between #{element} and #{@player}"
+					@player.add_item(element.get_name, element.get_number)
+					@map.delete_item(@map.get_items.index(element))
+					break
+				end
 			end	
 		end
 
