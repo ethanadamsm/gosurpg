@@ -37,7 +37,6 @@ class Map
 		end
 
 		@items.each do |element|
-			puts element
 			element.draw
 		end
 	end
@@ -94,12 +93,12 @@ class Map
 		end
 	end
 
-	def item_set_ground(index, boolean)
-		@items[index] = boolean
-	end
-
 	def get_items
 		@items
+	end
+
+	def delete_item(index)
+		@items.delete_at(index)
 	end
 
 end
