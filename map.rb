@@ -2,6 +2,7 @@ require "gosu"
 require_relative "z_order"
 require_relative "constants"
 require_relative "tile"
+require_relative "on_ground"
 
 class Map
 
@@ -21,9 +22,9 @@ class Map
 		fileani = open("media/ani.txt")
 		fileani = fileani.read
 		fileani = fileani.split(", ")
-		@itemani = []
+		@itemanimation = []
 		fileani.each do |element|
-			@itemani.push(Gosu::Image.new("media/" + element))
+			@itemanimation.push(Gosu::Image.new("media/" + element))
 		end
 		@items = []
 		create_items_random
@@ -87,10 +88,18 @@ class Map
 	end
 
 	def create_items_random
-		(0...rand(5)).each do |n|
+		(0...5).each do |n|
 			spot = rand(0...@itemnames.length)
-			@items.push(Item.new(@itemnames[spot], rand(3), rand(0...(Constants::WWIDTH - Constants::IWIDTH)), rand(0...(Constants::WHEIGHT - Constants::IHEIGHT)), Constants::IWIDTH, Constants::IHEIGHT, true, @itemani[spot]))
+			@items.push(OnGround.new(@itemnames[spot], rand(1..3), rand(0...(Constants::WWIDTH - Constants::IWIDTH)), rand(0...(Constants::WHEIGHT - Constants::IHEIGHT)), @itemanimation[spot]))
 		end
+	end
+
+	def move_items_left
+		@items.each do |element| element.move_left end
+	end
+
+	def move_items_right
+		@items.each do |element| element.move_right end
 	end
 
 	def get_items
