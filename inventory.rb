@@ -1,4 +1,6 @@
 require "gosu"
+require_relative "z_order"
+require_relative "constants"
 
 class Inventory
 
@@ -18,7 +20,7 @@ class Inventory
 	end
 
 	def draw
-
+		@border.draw(20, Constants::WHEIGHT - 30 - 20, ZOrder::INVENTORY)
 	end
 
 end
