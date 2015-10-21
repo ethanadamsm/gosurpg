@@ -26,8 +26,7 @@ class GameWindow < Gosu::Window
 			@map.get_items.each do |element| 
 				collision = Collision.new(element, @player)
 				if collision.has_collided
-					puts "Collision ocurred between #{element} and #{@player}"
-					@player.add_item(element.get_name, element.get_number)
+					@player.add_item(element.get_name, element.get_number, element.get_animation)
 					@map.delete_item(@map.get_items.index(element))
 					break
 				end
@@ -41,14 +40,14 @@ class GameWindow < Gosu::Window
 					@map.create_column_right
 				end
 				@map.move_column_left
-				@items.each do |element| element.move_right end
+				@map.move_items_right
 			when 2
 				@player.teleport_left
 				if @map.block_correct?("left")
 					@map.create_column_left
 				end
 				@map.move_column_right
-				@items.each do |element| element.move_left end
+				@map.move_items_left
 		end
 
 		@player.update
