@@ -14,6 +14,19 @@ class Map
 		(0..Constants::WHEIGHT / Constants::THEIGHT).each do |n|
 			@rows.push(create_row(n * Constants::THEIGHT))
 		end
+
+		filenames = open("media/names.txt")
+		filenames = filenames.read
+		@itemnames = filenames.split(",")
+		fileani = open("media/ani.txt")
+		fileani = fileani.read
+		fileani = fileani.split(", ")
+		@itemani = []
+		fileani.each do |element|
+			@itemani.push(Gosu::Image.new("media/" + element))
+		end
+		@items = []
+		create_items_random
 	end
 
 	def draw
@@ -21,6 +34,11 @@ class Map
 			element.each do |n|
 				n.draw
 			end
+		end
+
+		@items.each do |element|
+			puts element
+			element.draw
 		end
 	end
 
@@ -67,6 +85,21 @@ class Map
 				n.set_x(n.get_x + Constants::TWIDTH)
 			end
 		end
+	end
+
+	def create_items_random
+		(0...rand(5)).each do |n|
+			spot = rand(0...@itemnames.length)
+			@items.push(Item.new(@itemnames[spot], rand(3), rand(0...(Constants::WWIDTH - Constants::IWIDTH)), rand(0...(Constants::WHEIGHT - Constants::IHEIGHT)), Constants::IWIDTH, Constants::IHEIGHT, true, @itemani[spot]))
+		end
+	end
+
+	def item_set_ground(index, boolean)
+		@items[index] = boolean
+	end
+
+	def get_items
+		@items
 	end
 
 end
