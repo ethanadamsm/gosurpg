@@ -71,6 +71,11 @@ class Player
 
 	def draw
 		@animation.draw(@x, @y, ZOrder::PLAYER)
+		@inv.draw
+	end
+
+	def collision(hitbox2)
+		return @hitbox.hitbox[0] < hitbox2[0] + hitbox2[2] && @hitbox.hitbox[0] + @hitbox.hitbox[2] > hitbox2[0] && @hitbox.hitbox[1] + @hitbox.hitbox[3] > hitbox2[1] && @hitbox.hitbox[1] < hitbox2[1] + hitbox2[3]
 	end
 
 end
