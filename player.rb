@@ -32,8 +32,8 @@ class Player
 		end		
 	end
 
-	def add_item(name, quantity)
-		@inv.add_item(name, quantity)
+	def add_item(name, quantity, animation)
+		@inv.add_item(name, quantity, animation)
 	end
 
 	def teleport(x, y) 
