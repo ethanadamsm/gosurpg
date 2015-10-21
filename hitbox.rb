@@ -16,4 +16,9 @@ class Hitbox
 		[@x, @y, @w, @h]
 	end
 
+	def update_hitbox(x, y)
+		@x = x
+		@y = y
+	end
+
 end
