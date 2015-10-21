@@ -47,6 +47,10 @@ class Item
 		@ground = ground
 	end
 
+	def get_ground
+		@ground
+	end
+
 	def hitbox
 		@hitbox.hitbox
 	end
