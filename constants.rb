@@ -9,5 +9,6 @@ module Constants
 	IWIDTH = 15
 	IHEIGHT = 15
 	MOVEMENT = 2
+	CHANCEITEMS = 20
 
 end
