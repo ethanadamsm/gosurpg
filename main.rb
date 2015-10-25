@@ -39,15 +39,13 @@ class GameWindow < Gosu::Window
 				if @map.block_correct?("right")
 					@map.create_column_right
 				end
-				@map.move_column_left
-				@map.move_items_right
+				@map.move_map_left
 			when 2
 				@player.teleport_left
 				if @map.block_correct?("left")
 					@map.create_column_left
 				end
-				@map.move_column_right
-				@map.move_items_left
+				@map.move_map_right
 		end
 
 		@player.update
