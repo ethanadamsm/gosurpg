@@ -4,6 +4,8 @@ require_relative "constants"
 require_relative "player"
 require_relative "item"
 require_relative "collision"
+require_relative "gui"
+require_relative "z_order"
 
 class GameWindow < Gosu::Window
 
@@ -11,16 +13,23 @@ class GameWindow < Gosu::Window
 		super Constants::WWIDTH, Constants::WHEIGHT
 		@map = Map.new
 		@player = Player.new(Constants::WWIDTH / 2, Constants::WHEIGHT / 2)
+		@mouse = Gosu::Image.new("media/mouse.png")
+
+		@guistart = Gui.new(500, 400, 70, 40, "Welcome to RPG!", true)
+		@guistart.add_button()
+		@guistart.add_button()
+		@guistart.add_button()
+		@guistart.add_text()
 	end
 
 	def update
-		if button_down?(Gosu::KbUp)
+		if button_down?(Gosu::KbW)
 			@player.move_up
-		elsif button_down?(Gosu::KbDown)
+		elsif button_down?(Gosu::KbS)
 			@player.move_down
-		elsif button_down?(Gosu::KbLeft)
+		elsif button_down?(Gosu::KbA)
 			@player.move_left
-		elsif button_down?(Gosu::KbRight)
+		elsif button_down?(Gosu::KbD)
 			@player.move_right
 		elsif button_down?(Gosu::KbP)
 			@map.get_items.each do |element| 
@@ -54,6 +63,8 @@ class GameWindow < Gosu::Window
 	def draw
 		@map.draw
 		@player.draw
+		@guistart.draw
+		@mouse.draw(self.mouse_x, self.mouse_y, ZOrder::MOUSE)
 	end
 
 	def button_down(id)
