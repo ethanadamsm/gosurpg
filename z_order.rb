@@ -6,7 +6,8 @@ module ZOrder
 	INVENTORY = 3
 	TEXT = 4
 	GUI = 5
-	GUITEXT = 6
-	MOUSE = 7
+	BUTTON = 6
+	GUITEXT = 7
+	MOUSE = 8
 
 end
