@@ -116,7 +116,7 @@ class Map
 	end
 
 	def create_random_items_left
-		rand_num = rand(CHANCEITEMS)
+		rand_num = rand(Constants::CHANCEITEMS)
 		if rand_num == 0
 			spot = rand(0...@itemnames.length) 
 			@items.push(OnGround.new(@itemnames[spot], rand(1..3), Constants::TWIDTH - rand(15..19), rand(0...Constants::WHEIGHT - Constants::IHEIGHT), @itemanimation[spot])) 
