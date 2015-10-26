@@ -15,11 +15,10 @@ class GameWindow < Gosu::Window
 		@player = Player.new(Constants::WWIDTH / 2, Constants::WHEIGHT / 2)
 		@mouse = Gosu::Image.new("media/mouse.png")
 
-		@guistart = Gui.new(500, 400, 70, 40, "Welcome to RPG!", true)
-		@guistart.add_button()
-		@guistart.add_button()
-		@guistart.add_button()
-		@guistart.add_text()
+		@guistart = Gui.new(500, 400, 70, 40, "Welcome to RPG!", true, true)
+		@guistart.add_button(180, 80, 280, 40, "Rogue")
+		@guistart.add_button(180, 140, 280, 40, "Fighter")
+		@guistart.add_button(180, 200, 280, 40, "Mage")
 	end
 
 	def update
@@ -58,6 +57,7 @@ class GameWindow < Gosu::Window
 		end
 
 		@player.update
+
 	end
 
 	def draw
@@ -69,6 +69,11 @@ class GameWindow < Gosu::Window
 
 	def button_down(id)
 		close if id == Gosu::KbEscape
+		if id == Gosu::MsLeft
+			if @guistart.update(self.mouse_x, self.mouse_y)
+				@guistart.set_visibility(false)
+			end	
+		end
 	end
 
 end
