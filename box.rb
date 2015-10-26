@@ -13,18 +13,31 @@ class Box
 		@closable = closable
 		@animation = Gosu::Image.new("media/window.png")
 		@buttons = []
+		@mousex = 0
+		@mousey = 0
 	end
 
 	def draw 
-		scalex = @w / 100
-		scaley = @h / 100
+		scalex = @w / 100.0
+		scaley = @h / 100.0
 		font = Gosu::Font.new(12)
 		font.draw(@text, @x + (@w / 2) - (@text.length * 4), @y + 2, ZOrder::GUITEXT)
 		@animation.draw(@x, @y, ZOrder::GUI, scalex, scaley)
+		@buttons.each do |n|
+			n.draw
+		end
 	end
 
 	def add_button(x, y, w, h, text)
 		@buttons.push(Button.new(x, y, w, h, text))
+	end
+
+	def update(mousex, mousey)
+		@mousex = mousex
+		@mousey = mousey
+		@buttons.each do |button|
+			return button.collision?(mousex, mousey)		
+		end
 	end
 
 end
