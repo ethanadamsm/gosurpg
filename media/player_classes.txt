@@ -1,0 +1,2 @@
+Rogue, Fighter, Mage
+rogue.png, fighter.png, mage.png
