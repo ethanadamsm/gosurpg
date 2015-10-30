@@ -6,14 +6,16 @@ require_relative "item"
 require_relative "collision"
 require_relative "gui"
 require_relative "z_order"
+require_relative "enemy"
 
 class GameWindow < Gosu::Window
 
 	def initialize
 		super Constants::WWIDTH, Constants::WHEIGHT
 		@map = Map.new
-		@player = Player.new(Constants::WWIDTH / 2, Constants::WHEIGHT / 2)
+		@player = Player.new(Constants::WWIDTH / 2, Constants::WHEIGHT / 2, Constants::PWIDTH, Constants::PHEIGHT)
 		@mouse = Gosu::Image.new("media/mouse.png")
+		@enemy = Enemy.new(0, 0, Constants::PWIDTH, Constants::PHEIGHT)
 
 		@guistart = Gui.new(500, 400, 70, 40, "Welcome to RPG!", true, true)
 		@guistart.add_button(180, 80, 280, 40, "Rogue")
@@ -57,12 +59,14 @@ class GameWindow < Gosu::Window
 		end
 
 		@player.update
+		@enemy.move_to_player(@player.get_x, @player.get_y, @player.get_width, @player.get_height)
 
 	end
 
 	def draw
 		@map.draw
 		@player.draw
+		@enemy.draw
 		@guistart.draw
 		@mouse.draw(self.mouse_x, self.mouse_y, ZOrder::MOUSE)
 	end
