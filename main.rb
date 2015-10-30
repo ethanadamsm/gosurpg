@@ -26,6 +26,7 @@ class GameWindow < Gosu::Window
 			@player.move_up
 		elsif button_down?(Gosu::KbS)
 			@player.move_down
+			
 		elsif button_down?(Gosu::KbA)
 			@player.move_left
 		elsif button_down?(Gosu::KbD)
@@ -70,8 +71,16 @@ class GameWindow < Gosu::Window
 	def button_down(id)
 		close if id == Gosu::KbEscape
 		if id == Gosu::MsLeft
-			if @guistart.update(self.mouse_x, self.mouse_y)
-				@guistart.set_visibility(false)
+			case @guistart.button_collide?(self.mouse_x, self.mouse_y)
+					when 0 
+						@guistart.set_visibility(false)
+						@player.set_class("Rogue")
+					when 1
+						@guistart.set_visibility(false)
+						@player.set_class("Fighter")
+					when 2 
+						@guistart.set_visibility(false)
+						@player.set_class("Mage")
 			end	
 		end
 	end

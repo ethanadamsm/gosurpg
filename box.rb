@@ -32,11 +32,13 @@ class Box
 		@buttons.push(Button.new(x, y, w, h, text))
 	end
 
-	def update(mousex, mousey)
+	def button_collide?(mousex, mousey)
 		@mousex = mousex
 		@mousey = mousey
 		@buttons.each do |button|
-			return button.collision?(mousex, mousey)		
+			if button.collision?(mousex, mousey)
+				return @buttons.index(button)
+			end
 		end
 	end
 

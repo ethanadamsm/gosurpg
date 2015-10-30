@@ -28,11 +28,11 @@ class Gui
 		@mainbox.add_button(x, y, w, h, text)
 	end
 
-	def update(mousex, mousey)
+	def button_collide?(mousex, mousey)
 		if @visible
 			@mousex = mousex
 			@mousey = mousey 
-			return @mainbox.update(mousex, mousey)
+			return @mainbox.button_collide?(mousex, mousey)
 		end
 	end
 

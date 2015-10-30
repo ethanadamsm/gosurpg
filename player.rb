@@ -13,6 +13,9 @@ class Player
 		@y = y
 		@inv = Inventory.new
 		@hitbox = Hitbox.new(@x, @y, Constants::PWIDTH, Constants::PHEIGHT)
+		@class = nil
+		file = open("media/player_classes.txt")
+		file = file.read.split("\n")
 	end
 
 	def update
@@ -67,6 +70,10 @@ class Player
 
 	def hitbox
 		@hitbox.hitbox
+	end
+
+	def set_class(class_t)
+		@class = class_t
 	end
 
 	def draw

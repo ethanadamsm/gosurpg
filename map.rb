@@ -26,6 +26,7 @@ class Map
 		end
 		@items = []
 		create_items_random
+		puts @itemsnames
 
 		@chance = 10
 	end
