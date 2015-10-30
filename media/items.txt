@@ -1,2 +1,2 @@
-Branch, Leaf, Log, Rock
-branch.png, leaf.png, log.png, rock.png
+Branch, Leaf, Log, Rock, Pumpkin
+branch.png, leaf.png, log.png, rock.png, pumpkin.png
