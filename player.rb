@@ -7,10 +7,12 @@ require_relative "hitbox"
 
 class Player
 
-	def initialize(x, y) 
+	def initialize(x, y, w, h) 
 		@animation = Gosu::Image.new("media/player.png")
 		@x = x
 		@y = y
+		@w = w 
+		@h = h
 		@inv = Inventory.new
 		@hitbox = Hitbox.new(@x, @y, Constants::PWIDTH, Constants::PHEIGHT)
 	end
@@ -63,6 +65,22 @@ class Player
 
 	def move_down
 		@y += Constants::MOVEMENT
+	end
+
+	def get_width
+		@w
+	end
+
+	def get_height 
+		@h
+	end
+
+	def get_x
+		@x
+	end
+
+	def get_y
+		@y
 	end
 
 	def hitbox
